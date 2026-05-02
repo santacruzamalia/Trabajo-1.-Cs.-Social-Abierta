@@ -7,6 +7,8 @@ format: html
 # Librerías necesarias para el trabajo:
 ```{r}
 
+rm(list = ls()) # Limpiar el entorno de trabajo
+
 # Instalación de los paquetes necesarios
 install.packages(c("haven", "tidyverse", "sjlabelled", "srvyr", "gt", "kableExtra"))
 
@@ -23,17 +25,88 @@ library(kableExtra) # Para mejorar la apariencia de las tablas
 
 # Cargamos las bases de datos
 ```{r}
-datos_CEP_marzo_2000 = read_dta("Encuesta CEP 39 Mar-Abr 2000.dta")
+CEP_2025 = read_rds("cep95.rds")
 
-datos_CEP_mayo_2009 = read_sav("Encuesta CEP 59 May-Jun 2009.sav")
-
-datos_CEP_mayo_2019 = read_sav("Encuesta CEP 83 May 2019 v1.sav")
-
-datos_CEP_diciembre_2019 = read_sav("Encuesta CEP 84 Dic 2019 v1.sav")
+head(CEP_2025)
 ```
 
 # Escogemos las variables
 ```{r}
-CEP_39 = datos_CEP_marzo_2000 %>% select(p34_a, p34_b, p35a, p35_b)
+data_CEP_2025 = CEP_2025 %>%
+  select(elec_pres_urna_30, pond)
+
+head(data_CEP_2025)
 
 
+```
+
+# Limpieza y recodificación de las variables
+```{r}
+
+data_procesada_CEP_2025 <- data_CEP_2025 %>%
+  mutate(voto_pres = case_when(
+    elec_pres_urna_30 == 1  ~ "Eduardo Artés",
+    elec_pres_urna_30 == 2  ~ "Marco Enríquez-Ominami",
+    elec_pres_urna_30 == 3  ~ "Jannette Jara",
+    elec_pres_urna_30 == 4  ~ "Johanes Kaiser",
+    elec_pres_urna_30 == 5  ~ "José Antonio Kast",
+    elec_pres_urna_30 == 6  ~ "Evelyn Matthei",
+    elec_pres_urna_30 == 7  ~ "Harold Mayne-Nicholls",
+    elec_pres_urna_30 == 8  ~ "Franco Parisi",
+    elec_pres_urna_30 %in% c(9, 10) ~ "Nulo + Blanco", 
+    elec_pres_urna_30 == 11 ~ "No vota",
+    TRUE ~ NA_character_ 
+  )) %>%
+  filter(!is.na(voto_pres))
+
+```
+
+# Ponderación
+
+```{r}
+diseño_CEP = data_procesada_CEP_2025 %>%
+  as_survey_design(weights = pond)
+
+
+tabla_resultados = diseño_CEP %>%
+  group_by(voto_pres) %>%
+  summarise(porcentaje = survey_mean(na.rm = TRUE) * 100) %>%
+  arrange(desc(porcentaje))
+```
+
+# Visualización de los resultados
+
+```{r}
+#| label: visualizacion
+#| fig-cap: "Reproducción: Intención de Voto Presidencial (Total Muestra)"
+
+# 1. Definimos el orden manual de las categorías de control
+# Queremos que estas aparezcan al final del gráfico
+controles <- c("No vota", "Nulo + Blanco")
+
+# 2. Extraemos los nombres de los candidatos y los ordenamos por su porcentaje
+candidatos_ordenados <- tabla_resultados %>%
+  filter(!voto_pres %in% controles) %>%
+  arrange(porcentaje) %>% # De menor a mayor para que el mayor quede arriba al flipear
+  pull(voto_pres)
+
+# 3. Combinamos ambos: primero los controles y luego los candidatos
+# El orden en los niveles de un factor determina la posición en el eje
+orden_final <- c(controles, candidatos_ordenados)
+
+# 4. Aplicamos el factor y graficamos
+tabla_resultados %>%
+  mutate(voto_pres = factor(voto_pres, levels = orden_final)) %>%
+  ggplot(aes(x = voto_pres, y = porcentaje)) +
+  geom_col(fill = "#00ADEF") + 
+  coord_flip() +
+  geom_text(aes(label = paste0(round(porcentaje, 0), "%")), 
+            hjust = -0.2, size = 3.5) +
+  labs(title = "Intención de Voto Presidencial",
+       subtitle = "Escenario: Elección el próximo domingo (Urna)",
+       x = NULL, 
+       y = "Porcentaje (%)",
+       caption = "Fuente: Reproducción propia basada en datos CEP 2025.") +
+  theme_minimal() +
+  theme(panel.grid.major.y = element_blank()) # Limpia el fondo para que se vea más profesional
+```
