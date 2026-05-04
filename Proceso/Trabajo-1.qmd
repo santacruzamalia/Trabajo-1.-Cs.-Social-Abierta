@@ -58,7 +58,7 @@ library(kableExtra) # Para mejorar la apariencia de las tablas
 
 ## **Cargamos las bases de datos**
 ```{r}
-CEP_2025 = read_rds("cep95.rds")
+CEP_2025 = read_rds("entrada/cep95.rds")
 
 head(CEP_2025)
 ```
@@ -70,7 +70,6 @@ data_CEP_2025 = CEP_2025 %>%
   select(elec_pres_urna_30, pond)
 
 head(data_CEP_2025)
-
 
 ```
 
