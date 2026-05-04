@@ -6,6 +6,9 @@ format:
   html:
     theme: minty
     number-sections: true
+exec:
+  warning: false
+  message: false
     
 ---
 
