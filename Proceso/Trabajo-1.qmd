@@ -1,9 +1,13 @@
 ---
 title: "Trabajo 1"
 author: "Bianca Balmaceda, Joaquín Nuñez y Amalia Santa Cruz"
-format: html
-theme: quartz
 date: "2026-04-05"
+format: 
+  html:
+    theme: minty
+    toc: true
+    number-sections: true
+    code-fold: true
 ---
 
 # **Selección del artículo:**
