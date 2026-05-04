@@ -8,6 +8,7 @@ format:
     toc: true
     number-sections: true
     code-fold: true
+    
 ---
 
 # **Selección del artículo:**
@@ -42,7 +43,8 @@ Tercero y último, se realizó una recodificación de las categorías de respues
 
 ## **Librerías necesarias para el trabajo:**
 ```{r}
-
+#| label: Librerías
+#| echo: false
 rm(list = ls()) # Limpiar el entorno de trabajo
 
 library(haven) # Para leer archivos .dta y .sav
@@ -58,6 +60,8 @@ library(kableExtra) # Para mejorar la apariencia de las tablas
 
 ## **Cargamos las bases de datos**
 ```{r}
+#| label: Carga de datos
+#| echo: false
 CEP_2025 = read_rds("../Entrada/cep95.rds")
 
 head(CEP_2025)
@@ -66,6 +70,9 @@ head(CEP_2025)
 ## **Escogemos las variables**
 
 ```{r}
+#| label: Selección de variables
+#| echo: false
+
 data_CEP_2025 = CEP_2025 %>%
   select(elec_pres_urna_30, pond)
 
@@ -76,6 +83,8 @@ head(data_CEP_2025)
 ## **Limpieza y recodificación de las variables**
 
 ```{r}
+#| label: Limpieza y recodificación
+#| echo: false
 
 data_procesada_CEP_2025 <- data_CEP_2025 %>%
   mutate(voto_pres = case_when(
@@ -98,6 +107,8 @@ data_procesada_CEP_2025 <- data_CEP_2025 %>%
 ## **Ponderación**
 
 ```{r}
+#| label: Ponderación
+#| echo: false
 diseño_CEP = data_procesada_CEP_2025 %>%
   as_survey_design(weights = pond)
 
@@ -116,6 +127,7 @@ De esta manera, el gráfico presenta de forma prioritaria a los candidatos con m
 ```{r}
 #| label: visualizacion
 #| fig-cap: "Reproducción: Intención de Voto Presidencial (Total Muestra)"
+#| echo: false
 
 # 1. Definimos el orden manual de las categorías de control
 # Queremos que estas aparezcan al final del gráfico
