@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bianca Balmaceda, Joaquín Nuñez y Amalia Santa Cruz">
+<meta name="dcterms.date" content="2026-04-05">
+
+<title>Trabajo 1</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Trabajo-1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Trabajo-1_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Trabajo-1_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Trabajo-1_files/libs/quarto-html/popper.min.js"></script>
+<script src="Trabajo-1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Trabajo-1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Trabajo-1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Trabajo-1_files/libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Trabajo-1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Trabajo-1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Trabajo-1_files/libs/bootstrap/bootstrap-4fab7da059a6feec3e3641fb57eee7e2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#selección-del-artículo" id="toc-selección-del-artículo" class="nav-link active" data-scroll-target="#selección-del-artículo"><span class="header-section-number">1</span> <strong>Selección del artículo:</strong></a></li>
+  <li><a href="#evaluación-de-reproducibilidad" id="toc-evaluación-de-reproducibilidad" class="nav-link" data-scroll-target="#evaluación-de-reproducibilidad"><span class="header-section-number">2</span> <strong>Evaluación de reproducibilidad:</strong></a>
+  <ul class="collapse">
+  <li><a href="#disponibilidad-de-datos" id="toc-disponibilidad-de-datos" class="nav-link" data-scroll-target="#disponibilidad-de-datos"><span class="header-section-number">2.1</span> <strong>Disponibilidad de datos:</strong></a></li>
+  <li><a href="#disponibilidad-de-código" id="toc-disponibilidad-de-código" class="nav-link" data-scroll-target="#disponibilidad-de-código"><span class="header-section-number">2.2</span> <strong>Disponibilidad de código:</strong></a></li>
+  <li><a href="#documentación" id="toc-documentación" class="nav-link" data-scroll-target="#documentación"><span class="header-section-number">2.3</span> <strong>Documentación:</strong></a></li>
+  <li><a href="#transparencia" id="toc-transparencia" class="nav-link" data-scroll-target="#transparencia"><span class="header-section-number">2.4</span> <strong>Transparencia:</strong></a></li>
+  </ul></li>
+  <li><a href="#análisis-reproducible" id="toc-análisis-reproducible" class="nav-link" data-scroll-target="#análisis-reproducible"><span class="header-section-number">3</span> <strong>Análisis reproducible:</strong></a>
+  <ul class="collapse">
+  <li><a href="#proceso-de-reproducción" id="toc-proceso-de-reproducción" class="nav-link" data-scroll-target="#proceso-de-reproducción"><span class="header-section-number">3.1</span> <strong>Proceso de reproducción:</strong></a></li>
+  <li><a href="#librerías-necesarias-para-el-trabajo" id="toc-librerías-necesarias-para-el-trabajo" class="nav-link" data-scroll-target="#librerías-necesarias-para-el-trabajo"><span class="header-section-number">3.2</span> <strong>Librerías necesarias para el trabajo:</strong></a></li>
+  <li><a href="#cargamos-las-bases-de-datos" id="toc-cargamos-las-bases-de-datos" class="nav-link" data-scroll-target="#cargamos-las-bases-de-datos"><span class="header-section-number">3.3</span> <strong>Cargamos las bases de datos</strong></a></li>
+  <li><a href="#escogemos-las-variables" id="toc-escogemos-las-variables" class="nav-link" data-scroll-target="#escogemos-las-variables"><span class="header-section-number">3.4</span> <strong>Escogemos las variables</strong></a></li>
+  <li><a href="#limpieza-y-recodificación-de-las-variables" id="toc-limpieza-y-recodificación-de-las-variables" class="nav-link" data-scroll-target="#limpieza-y-recodificación-de-las-variables"><span class="header-section-number">3.5</span> <strong>Limpieza y recodificación de las variables</strong></a></li>
+  <li><a href="#ponderación" id="toc-ponderación" class="nav-link" data-scroll-target="#ponderación"><span class="header-section-number">3.6</span> <strong>Ponderación</strong></a></li>
+  <li><a href="#visualización-de-los-resultados" id="toc-visualización-de-los-resultados" class="nav-link" data-scroll-target="#visualización-de-los-resultados"><span class="header-section-number">3.7</span> <strong>Visualización de los resultados</strong></a></li>
+  <li><a href="#dificultades" id="toc-dificultades" class="nav-link" data-scroll-target="#dificultades"><span class="header-section-number">3.8</span> <strong>Dificultades:</strong></a></li>
+  </ul></li>
+  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones"><span class="header-section-number">4</span> <strong>Conclusiones:</strong></a></li>
+  <li><a href="#recomendaciones" id="toc-recomendaciones" class="nav-link" data-scroll-target="#recomendaciones"><span class="header-section-number">5</span> <strong>Recomendaciones:</strong></a></li>
+  <li><a href="#bibliografía" id="toc-bibliografía" class="nav-link" data-scroll-target="#bibliografía"><span class="header-section-number">6</span> <strong>Bibliografía:</strong></a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Trabajo 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Bianca Balmaceda, Joaquín Nuñez y Amalia Santa Cruz </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 5, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="selección-del-artículo" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> <strong>Selección del artículo:</strong></h1>
+<p>Para el presente reporte de reproducibilidad se escogió el reporte de la Encuesta CEP N° 95, Septiembre-Octubre 2025, publicada el 27 octubre de 2025 por el Centro de Estudios Públicos.</p>
+</section>
+<section id="evaluación-de-reproducibilidad" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> <strong>Evaluación de reproducibilidad:</strong></h1>
+<section id="disponibilidad-de-datos" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="disponibilidad-de-datos"><span class="header-section-number">2.1</span> <strong>Disponibilidad de datos:</strong></h2>
+<p>Los datos utilizados en el reporte, son de acceso abierto, utiliza la base de datos del CEP N°95.</p>
+</section>
+<section id="disponibilidad-de-código" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="disponibilidad-de-código"><span class="header-section-number">2.2</span> <strong>Disponibilidad de código:</strong></h2>
+<p>El reporte no proporciona acceso al código utilizado para el análisis.</p>
+</section>
+<section id="documentación" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="documentación"><span class="header-section-number">2.3</span> <strong>Documentación:</strong></h2>
+<p>El reporte no describe claramente los métodos y procedimientos utilizados para el estudio. Se entrega información general sobre la metodología en cuanto a la población objetivo, el diseño muestral, el modo de aplicación y la tasa de respuesta. Está disponible el cuestionario, diccionario de variables, manual de usuario y los datos de la muestra, además de la base de datos, por lo que otro investigador si podría replicar el estudio.</p>
+</section>
+<section id="transparencia" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="transparencia"><span class="header-section-number">2.4</span> <strong>Transparencia:</strong></h2>
+<p>El reporte no proporciona información sobre los posibles conflictos de interés, financiamiento, y otros aspectos relacionados con la transparencia de la investigación. Sin embargo, al ser un artículo del CEP se puede obtener información adicional por medio de la institución. En la página web hay un apartado de financiamiento donde se detalla que se financia gracias a la contribución de personas naturales y jurídicas, y que ningún conglomerado económico o empresa puede donar más del 10% del presupuesto anual de la institución (Centro de Estudios Públicos [CEP], s.f.). Además, hay detalle de los principales contribuyentes y dentro de qué rango monetario aportan.</p>
+</section>
+</section>
+<section id="análisis-reproducible" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> <strong>Análisis reproducible:</strong></h1>
+<p>El resultado específico del reporte que se reproducirá es el resultado de la siguiente pregunta: “Si las elecciones presidenciales fueran el próximo domingo, y los candidatos fueran los siguientes, ¿por quién votaría usted?” <img src="https://www.cepchile.cl/encuesta/encuesta-cep-n-95-septiembre-octubre-2025/20-3/.png" class="img-fluid"></p>
+<section id="proceso-de-reproducción" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="proceso-de-reproducción"><span class="header-section-number">3.1</span> <strong>Proceso de reproducción:</strong></h2>
+<p>Respecto al proceso de reproducción de la figura seleccionada, se inició con una revisión del diccionario de variables de la encuesta CEP 2025 disponible en la [página web oficial del Centro de Estudios Públicos] (https://www.cepchile.cl/encuesta/encuesta-cep-n-95-septiembre-octubre-2025/). Se seleccionó la variable “elec_pres_urna_30”, que contiene la respuesta a la pregunta: “Si las elecciones presidenciales fueran el próximo domingo, y los candidatos fueran los siguientes, ¿por quién votaría usted?”.</p>
+<p>Posteriormente, se procedió a identificar el factor de expansión necesario para obtener resultados representativos a nivel nacional. Tras inspeccionar los metadatos y las etiquetas del archivo original, se verificó que la columna “pond” correspondía al peso estadístico para la “Muestra Total”, es decir, el factor de expansión, pudiendo así realizar el procesamiento de una encuesta de diseño complejo como lo es CEP.</p>
+<p>El procesamiento se estructuró en tres etapas que buscan la coincidencia con los resultados oficiales. Primero, se aplicó un filtro sobre la base de datos para aislar las variables críticas. Segundo, se definió el diseño de la encuesta mediante la librería “srvyr”, incorporando el ponderador “pond” en los cálculos de proporciones.</p>
+<p>Tercero y último, se realizó una recodificación de las categorías de respuesta. Aquí, se agruparon las opciones “Nulo” y “Blanco” en una sola categoría para el análisis, siguiendo el criterio de presentación del informe original. De no ser así, los porcentajes individuales no permitirían alcanzar lo reportado en la visualización de referencia.</p>
+</section>
+<section id="librerías-necesarias-para-el-trabajo" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="librerías-necesarias-para-el-trabajo"><span class="header-section-number">3.2</span> <strong>Librerías necesarias para el trabajo:</strong></h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>()) <span class="co"># Limpiar el entorno de trabajo</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven) <span class="co"># Para leer archivos .dta y .sav</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Para manipulación de datos</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjlabelled) <span class="co"># Para trabajar con etiquetas de variables</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'sjlabelled'
+
+The following object is masked from 'package:forcats':
+
+    as_factor
+
+The following object is masked from 'package:dplyr':
+
+    as_label
+
+The following object is masked from 'package:ggplot2':
+
+    as_label
+
+The following objects are masked from 'package:haven':
+
+    as_factor, read_sas, read_spss, read_stata, write_sas, zap_labels</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(srvyr) <span class="co"># Para análisis de encuestas</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'srvyr'
+
+The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt) <span class="co"># Para crear tablas</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># Para mejorar la apariencia de las tablas</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'kableExtra'
+
+The following object is masked from 'package:srvyr':
+
+    group_rows
+
+The following object is masked from 'package:dplyr':
+
+    group_rows</code></pre>
+</div>
+</div>
+</section>
+<section id="cargamos-las-bases-de-datos" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="cargamos-las-bases-de-datos"><span class="header-section-number">3.3</span> <strong>Cargamos las bases de datos</strong></h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>CEP_2025 <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="st">"../Entrada/cep95.rds"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CEP_2025)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ump zona_u_r region_3 elec_pres_urna_30 elec_pres_urna_31 elec_pres_urna_32
+1  96        1        8                 5                 2                 1
+2 197        1       13                11                 5                 5
+3 197        1       13                 4                 2                 1
+4  12        1        2                 4                 2                 2
+5 198        1       13                 3                 1                 5
+6 192        1       13                10                 4                 4
+  elec_pres_urna_33 bienestar_2 bienestar_3 percepcion_2 percepcion_3
+1                 2          10           5            2            1
+2                 5           5           5            2            2
+3                 2           5           5            3            3
+4                 2           3           1            1            2
+5                 1           8           5            3            3
+6                 4          10           6            3            2
+  percepcion_5 percepcion_6 percepcion_38 percepcion_4 eval_gob_1 iden_pol_2
+1            3            1             4            3          2          3
+2            3            3             3            2          1         -9
+3            2            2             4            2          2         10
+4            3            3             5            3          2          8
+5            3            2             3            2          1          3
+6            2            1             4            2         -8         -8
+  eval_act_pol_1_fh eval_act_pol_1_ae eval_act_pol_1_el eval_act_pol_1_dv
+1                 1                 6                 3                 5
+2                 5                 2                 3                 1
+3                 2                 3                 2                 5
+4                 1                 3                 1                 3
+5                 4                 2                 4                 2
+6                 2                 6                 6                 6
+  eval_act_pol_1_em eval_act_pol_1_hb eval_act_pol_1_ft eval_act_pol_1_gq
+1                 6                 6                 3                 3
+2                 2                 2                 1                 2
+3                 3                 2                 4                 4
+4                 1                 1                 3                 1
+5                 2                 6                 6                 2
+6                 6                 6                 6                 6
+  eval_act_pol_1_gw eval_act_pol_1_hd eval_act_pol_1_x eval_act_pol_1_gt
+1                 6                 5                5                 3
+2                 1                 1                1                 5
+3                 2                 5                4                 1
+4                 2                 5                1                 1
+5                 6                 2                3                 4
+6                 6                 6                6                 6
+  eval_act_pol_1_fa eval_act_pol_1_hc eval_act_pol_1_gx confianza_6_a
+1                 6                 6                 6             3
+2                 2                 3                 1             2
+3                 3                 2                 3             2
+4                 3                 2                 6             3
+5                 2                 2                 6             3
+6                 6                 6                 6             1
+  confianza_6_b confianza_6_c confianza_6_j confianza_6_d confianza_6_e
+1             2             2             3             3             1
+2             3             2             2             3             2
+3             3             1             4             4             2
+4             2             2             4             4             3
+5             3             2             3             3             3
+6             1             3             3             3             3
+  confianza_6_f confianza_6_n confianza_6_x confianza_6_g confianza_6_h
+1             4             2             3             2             2
+2             3             2             3             2             3
+3             2             4             3             2             2
+4             4             2             3             4             2
+5             3             2             3             3             2
+6             2             2             3             3             3
+  confianza_6_i confianza_6_k confianza_6_s confianza_6_o confianza_6_p
+1             4             4             2             2             3
+2             2             3             3             3             3
+3             4             2             3             2             3
+4             4             4             2             2             4
+5             2             3             2             3             2
+6             3             3             3             3             3
+  confianza_6_r confianza_6_m confianza_6_ab confianza_6_ac democracia_38
+1             2             2              2              3             8
+2             2             2              3              3             5
+3             2             1              2              3             2
+4             2             3              3              3            10
+5             2             2              3              3             7
+6             3             1              2              2            10
+  pobreza_63 pobreza_62 religion_14 religion_64 democracia_21 democracia_37_a
+1          5          5           2           2             2               1
+2          4          3           2           2             2               2
+3          5          3           2           2             3               1
+4         10         10           2           3             1               1
+5          7          6           2           2             1               1
+6         10         10           2           2             3               1
+  democracia_37_b democracia_37_c democracia_37_d pp_congreso_61_b
+1               1               3               2                1
+2               3               3               3                2
+3               1               4               4                2
+4               2               3               1                2
+5               1               3               3                2
+6               1               1               1                2
+  polarizacion_1_a polarizacion_1_b polarizacion_6_a polarizacion_6_b
+1                4                5                5                5
+2                2                5               10                1
+3               10                1                1               10
+4               10                0                0                2
+5                3                6                9                5
+6                5                0               -8               -8
+  polarizacion_6_c polarizacion_6_d polarizacion_6_e confianza_17
+1                5                5                5            3
+2                2                2                1            4
+3               10                8                8            3
+4               10                2                0            3
+5                4                5                5            1
+6               -8               -8               -8           -8
+  interes_pol_1_b interes_pol_2_a interes_pol_2_b interes_pol_2_c
+1               4               3               2               3
+2               5               2               2               2
+3               3               2               2               3
+4               2               1               2               1
+5               3               2               3               2
+6               5               3               3               3
+  interes_pol_2_d interes_pol_2_e interes_pol_2_f iden_pol_3 iden_pol_3_a
+1               2               2               3          9           NA
+2               3               2               3         15           15
+3               2               2               3         27           NA
+4               2               1               1         27           NA
+5               2               2               3         15           15
+6               3               3               3         15           15
+  elec_part_37 elec_pres_144_a elec_pres_144_b2 elec_pres_125 elec_part_4
+1            1               2               NA             3           1
+2            1               1               NA             2           1
+3            1               2               NA             2           1
+4            1               2               NA             2           1
+5            1               1               NA             2           1
+6            2              NA                5             4           4
+  elec_pres_1_responde elec_pres_2_responde elec_pres_148 elec_pres_149_a
+1                    1                    1             5               3
+2                    1                    1             3               3
+3                    1                    1             4               2
+4                    1                    1             4               3
+5                    1                    1             3               3
+6                    8                    8            -8               3
+  elec_pres_149_b elec_pres_149_c elec_pres_149_d elec_pres_149_e
+1               3               2               2               2
+2               3               1               3               3
+3               3               3               1               2
+4               3               3               1               3
+5               2               1               3               3
+6               3               3               3               3
+  elec_pres_149_f elec_pres_149_g elec_pres_149_h elec_pres_150_a
+1               3               3               2               2
+2               3               3               3               1
+3               2               2               2               2
+4               3               3               3               2
+5               3               3               3               1
+6               3               3               3               3
+  elec_pres_150_b elec_pres_150_c elec_pres_151_a elec_pres_151_b
+1               1               2               5               5
+2               3               1               2               3
+3               1               2               0               3
+4               1               2               0               0
+5               2               1               0               6
+6               3               3              -8              -8
+  elec_pres_151_c elec_pres_151_d elec_pres_151_e elec_pres_151_f
+1               1              10              10               5
+2               1               8               8               7
+3               1              10              10               8
+4               0              10               7               4
+5               2               7              10               7
+6              -8              -8              -8              -8
+  elec_pres_151_g elec_pres_151_h elec_pres_152_a elec_pres_152_b
+1               5               5               8               8
+2               5               5               3               3
+3               5              10               4               4
+4               5               3               4               4
+5               5               6               3               3
+6              -8              -8              -8              -8
+  elec_pres_152_c elec_pres_152_d elec_pres_152_e elec_pres_152_f
+1               3               5               8               5
+2               3               3               3               3
+3               4               4               6               4
+4               4               4               4               4
+5               3               3               3               3
+6              -8              -8              -8              -8
+  elec_pres_153_a elec_pres_153_b elec_pres_153_c elec_pres_153_d
+1               8               5               5               5
+2               3               3               3               3
+3               4               4               4               4
+4               4               4               4               4
+5               3               5               3               3
+6              -8              -8              -8              -8
+  elec_pres_153_e elec_pres_153_f elec_pres_153_g elec_pres_153_h
+1               5               5               5               5
+2               3               3               3               3
+3               4               4               4               4
+4               4               4               4               4
+5               3               5               5               3
+6              -8              -8              -8              -8
+  elec_pres_145_a elec_pres_145_b democracia_12 anomia_4_a bienestar_19_c
+1               7               6             3          3              3
+2               4               1             2          3              4
+3              12               7             2          3              4
+4               4               3             3          4              2
+5               2               1             3          2              4
+6               2               7             3          2              3
+  bienestar_19_d bienestar_19_e rol_gobierno_16 ciudadania_16 ciudadania_34
+1              4              4               3             4             3
+2              4              4               4             3             7
+3              4              4               3             4             2
+4             -8             -8               3             5             1
+5              4              4               1             4             1
+6              4              1               4             4             2
+  sexo edad nac_dia nac_mes nac_ano info_enc_59_2_otro info_enc_58
+1    2   25       2       6    2000                 NA           1
+2    2   63      18      11    1961                 NA           2
+3    1   61       8       3    1963                 NA           2
+4    1   62      14      12    1962                 NA           2
+5    2   86       1       1    1939                 NA           2
+6    2   34      17      12    1990                 NA           2
+  info_enc_30_b info_enc_30_b_otro mtf_60_aux mtf_60 info_enc_50_a_aux
+1             5                 NA          1      0                NA
+2            NA                 NA          1      3                 1
+3            NA                 NA          1      0                NA
+4            NA                 NA          1      3                 1
+5            NA                 NA          1      2                 1
+6            NA                 NA          1      1                 1
+  info_enc_50_a estado_civil_g educacion_104_a info_enc_61 info_enc_57
+1            NA              5               4           2           1
+2             1              1               4           2           2
+3            NA              8               4           2           1
+4             3              6               6           2           1
+5             2              7               3           2           1
+6             1              8               1           2           1
+  info_hogar_28_c info_enc_12_c info_enc_12_c_otro info_enc_35 info_enc_20_c
+1              NA             2                 NA           1             8
+2               5             1                 NA           3             3
+3              NA             1                 NA           1             4
+4              NA             2                 NA           1             4
+5              NA             7                 NA           3             5
+6              NA             1                 NA           1             3
+  info_hogar_3_c gse      pond encuesta encuesta_a encuesta_m id_bu_encuesta
+1              8   4 0.5854936       95       2025          9              1
+2              4   3 0.5274519       95       2025          9              2
+3              4   4 0.2664923       95       2025          9              3
+4              4   3 0.4739814       95       2025          9              4
+5              5   3 0.4242343       95       2025          9              5
+6              3   3 0.4141876       95       2025          9              6
+  id_bu percepcion_1_a percepcion_1_b percepcion_1_c democracia_20
+1  1-95              1             13              4             3
+2  2-95             16             10              1             2
+3  3-95              6              3             14             4
+4  4-95              3              2              4             5
+5  5-95              3              1             10             4
+6  6-95              2             14              6             2
+  elec_pres_147 elec_parla_36_a elec_parla_36_b elec_parla_36_c elec_parla_36_d
+1             3               2               2               1               1
+2            -9               1               1               1               2
+3             5               2               2               2               1
+4             5               2               2               2               2
+5             1               1               1               1               2
+6            NA              -8              -8              -8              -8
+  elec_parla_36_e elec_parla_36_f esc_nivel_1_c info_enc_59_2 estrato  secu
+1               1               1             8             1      12 95096
+2               2               1             4             1      20 95197
+3               1               2             4             1      20 95197
+4               1               2             4             1       2 95012
+5               2               2             8             1      20 95198
+6              -8              -8             4             2      20 95192</code></pre>
+</div>
+</div>
+</section>
+<section id="escogemos-las-variables" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="escogemos-las-variables"><span class="header-section-number">3.4</span> <strong>Escogemos las variables</strong></h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data_CEP_2025 <span class="ot">=</span> CEP_2025 <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(elec_pres_urna_30, pond)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_CEP_2025)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  elec_pres_urna_30      pond
+1                 5 0.5854936
+2                11 0.5274519
+3                 4 0.2664923
+4                 4 0.4739814
+5                 3 0.4242343
+6                10 0.4141876</code></pre>
+</div>
+</div>
+</section>
+<section id="limpieza-y-recodificación-de-las-variables" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="limpieza-y-recodificación-de-las-variables"><span class="header-section-number">3.5</span> <strong>Limpieza y recodificación de las variables</strong></h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data_procesada_CEP_2025 <span class="ot">&lt;-</span> data_CEP_2025 <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">voto_pres =</span> <span class="fu">case_when</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">==</span> <span class="dv">1</span>  <span class="sc">~</span> <span class="st">"Eduardo Artés"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">==</span> <span class="dv">2</span>  <span class="sc">~</span> <span class="st">"Marco Enríquez-Ominami"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">==</span> <span class="dv">3</span>  <span class="sc">~</span> <span class="st">"Jannette Jara"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">==</span> <span class="dv">4</span>  <span class="sc">~</span> <span class="st">"Johanes Kaiser"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">==</span> <span class="dv">5</span>  <span class="sc">~</span> <span class="st">"José Antonio Kast"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">==</span> <span class="dv">6</span>  <span class="sc">~</span> <span class="st">"Evelyn Matthei"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">==</span> <span class="dv">7</span>  <span class="sc">~</span> <span class="st">"Harold Mayne-Nicholls"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">==</span> <span class="dv">8</span>  <span class="sc">~</span> <span class="st">"Franco Parisi"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">10</span>) <span class="sc">~</span> <span class="st">"Nulo + Blanco"</span>, </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    elec_pres_urna_30 <span class="sc">==</span> <span class="dv">11</span> <span class="sc">~</span> <span class="st">"No vota"</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span> </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(voto_pres))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="ponderación" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="ponderación"><span class="header-section-number">3.6</span> <strong>Ponderación</strong></h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>diseño_CEP <span class="ot">=</span> data_procesada_CEP_2025 <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(<span class="at">weights =</span> pond)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>tabla_resultados <span class="ot">=</span> diseño_CEP <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(voto_pres) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">porcentaje =</span> <span class="fu">survey_mean</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(porcentaje))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `dplyr::summarise()`.
+ℹ In argument: `porcentaje = survey_mean(na.rm = TRUE) * 100`.
+ℹ In group 1: `voto_pres = "Eduardo Artés"`.
+Caused by warning:
+! na.rm argument has no effect on survey_mean when calculating grouped proportions. 
+This warning is displayed once per session.</code></pre>
+</div>
+</div>
+</section>
+<section id="visualización-de-los-resultados" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="visualización-de-los-resultados"><span class="header-section-number">3.7</span> <strong>Visualización de los resultados</strong></h2>
+<p>En la etapa de salida, se generó una visualización que se corresponde con la jerarquía del documento original. Para evitar un ordenamiento puramente alfabético o de magnitud que pudiera distorsionar la interpretación, se establecieron niveles de factor específicos.</p>
+<p>De esta manera, el gráfico presenta de forma prioritaria a los candidatos con mayor intención de voto y se desplaza hacia la base donde se hallan las categorías de control (“Nulo + Blanco” y “No vota”). Se decide ocupar el mismo ordenamiento ya que permite una mejor comprensión a primera vista del gráfico.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definimos el orden manual de las categorías de control</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Queremos que estas aparezcan al final del gráfico</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>controles <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"No vota"</span>, <span class="st">"Nulo + Blanco"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Extraemos los nombres de los candidatos y los ordenamos por su porcentaje</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>candidatos_ordenados <span class="ot">&lt;-</span> tabla_resultados <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>voto_pres <span class="sc">%in%</span> controles) <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(porcentaje) <span class="sc">%&gt;%</span> <span class="co"># De menor a mayor para que el mayor quede arriba al flipear</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(voto_pres)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Combinamos ambos: primero los controles y luego los candidatos</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># El orden en los niveles de un factor determina la posición en el eje</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>orden_final <span class="ot">&lt;-</span> <span class="fu">c</span>(controles, candidatos_ordenados)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Aplicamos el factor y graficamos</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>tabla_resultados <span class="sc">%&gt;%</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">voto_pres =</span> <span class="fu">factor</span>(voto_pres, <span class="at">levels =</span> orden_final)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> voto_pres, <span class="at">y =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#00ADEF"</span>) <span class="sc">+</span> </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(porcentaje, <span class="dv">0</span>), <span class="st">"%"</span>)), </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Intención de Voto Presidencial"</span>,</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Escenario: Elección el próximo domingo (Urna)"</span>,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, </span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Porcentaje (%)"</span>,</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Fuente: Reproducción propia basada en datos CEP 2025."</span>) <span class="sc">+</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="co"># Limpia el fondo para que se vea más profesional</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Trabajo-1_files/figure-html/visualizacion-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Reproducción: Intención de Voto Presidencial (Total Muestra)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dificultades" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="dificultades"><span class="header-section-number">3.8</span> <strong>Dificultades:</strong></h2>
+<p>Aunque el informe oficial no cita el nombre técnico del peso, este se identificó como “pond” tras realizar un escaneo de los metadatos del archivo original, contrastando los nombres de las columnas con los descriptores del diccionario de variables proporcionado por la institución.</p>
+</section>
+</section>
+<section id="conclusiones" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> <strong>Conclusiones:</strong></h1>
+<p>En cuanto al análisis realizado se concluye que el nivel de reproducibilidad del reporte de la Encuesta CEP N° 95 es alto, aunque con ciertas limitaciones. La base de datos, el diccionario de variables, el cuestionario y el manual de usuario son de acceso abierto, lo que permite replicar los resultados sin mayores dificultades, a pesar de que el código utilizado no es de acceso abierto. Al intentar reproducir los resultados de la pregunta sobre intención de voto presidencial, se logró replicar el resultado en su gran mayoría. La discrepancia entre el resultado reproducido y el original es en la categoría “No vota”, la reproducción arrojó un 8%, mientras que el original muestra un 9%, esta diferencia sugiere que los resultados originales fueron obtenidos con un esquema de ponderación específico que no se encuentra documentado públicamente. Es por esta ausencia de los pesos muestrales exactos aplicados por los investigadores del CEP, y por la ausencia del código utilizado para los análisis, que no se pudo replicar este resultado específico de forma exacta, siendo esto la principal limitación para la reproducibilidad del reporte de la encuesta. Por lo mismo, es posible replicar los resultados de forma aproximada, pero la falta de documentación detallada y el código impide la reproducción exacta.</p>
+</section>
+<section id="recomendaciones" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> <strong>Recomendaciones:</strong></h1>
+<p>La principal recomendación para mejorar la reproducibilidad del reporte de la encuesta es publicar el código que fue utilizado para analizar y procesar los datos, idealmente a través de algún repositorio público como GitHub, esto permitiría a otros investigadores poder replicar los resultados de forma exacta. En segundo lugar, es de suma importancia documentar las decisiones que se toman en cuanto a la metodología. Ejemplos en este caso son el esquema de ponderación utilizado y el tratamiento de casos perdidos. Se debiera especificar de forma clara los pesos muestrales que fueron aplicados al cálculo de porcentajes, para poder corregir los sesgos en la muestra, y se debiera explicar el tratamiento ya que este podría afectar los resultados. En tercer lugar, para mejorar la reproducibilidad del artículo, y en alineación con las prácticas de la ciencia abierta, se debiera incluir un archivo de sintaxis reproducible, el cual sirva de ejemplo y reproduzca las tablas y figuras principales del reporte. En cuarto lugar, se sugiere una mayor transparencia metodológica en el reporte mismo. A pesar de que se entrega información general sobre el diseño muestral y la metodología, falta información clara en el mismo reporte de la encuesta sobre los posibles conflictos de interés, financiamiento y transparencia de la investigación.</p>
+</section>
+<section id="bibliografía" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> <strong>Bibliografía:</strong></h1>
+<p>Centro de Estudios Públicos. (2025, 27 de octubre). Encuesta CEP N° 95, Septiembre-Octubre 2025. https://www.cepchile.cl/encuesta/encuesta-cep-n-95-septiembre-octubre-2025/</p>
+<p>Centro de Estudios Públicos. (s.f.). Financiamiento. Recuperado el 29 de abril de 2026, de https://www.cepchile.cl/financiamiento/</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
