@@ -5,9 +5,7 @@ date: "2026-04-05"
 format: 
   html:
     theme: minty
-    toc: true
     number-sections: true
-    code-fold: true
     
 ---
 
