@@ -58,7 +58,7 @@ library(kableExtra) # Para mejorar la apariencia de las tablas
 
 ## **Cargamos las bases de datos**
 ```{r}
-CEP_2025 = read_rds("entrada/cep95.rds")
+CEP_2025 = read_rds("../Entrada/cep95.rds")
 
 head(CEP_2025)
 ```
