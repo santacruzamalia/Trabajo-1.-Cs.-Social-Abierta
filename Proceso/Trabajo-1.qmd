@@ -33,7 +33,7 @@ El resultado específico del reporte que se reproducirá es el resultado de la s
 
 
 ## **Proceso de reproducción:**
-Respecto al proceso de reproducción de la figura seleccionada, se inició con una revisión del diccionario de variables de la encuesta CEP 2025 disponible en la [página web oficial del Centro de Estudios Públicos] (https://www.cepchile.cl/encuesta/encuesta-cep-n-95-septiembre-octubre-2025/). Se seleccionó la variable “elec_pres_urna_30”, que contiene la respuesta a la pregunta: “Si las elecciones presidenciales fueran el próximo domingo, y los candidatos fueran los siguientes, ¿por quién votaría usted?”.
+Respecto al proceso de reproducción de la figura seleccionada, se inició con una revisión del diccionario de variables de la encuesta CEP 2025 disponible en la [página web oficial del Centro de Estudios Públicos](https://www.cepchile.cl/encuesta/encuesta-cep-n-95-septiembre-octubre-2025/). Se seleccionó la variable “elec_pres_urna_30”, que contiene la respuesta a la pregunta: “Si las elecciones presidenciales fueran el próximo domingo, y los candidatos fueran los siguientes, ¿por quién votaría usted?”.
 
 Posteriormente, se procedió a identificar el factor de expansión necesario para obtener resultados representativos a nivel nacional. Tras inspeccionar los metadatos y las etiquetas del archivo original, se verificó que la columna “pond” correspondía al peso estadístico para la "Muestra Total", es decir, el factor de expansión, pudiendo así realizar el procesamiento de una encuesta de diseño complejo como lo es CEP.
 
