@@ -1,9 +1,13 @@
 ---
 title: "Trabajo 1"
 author: "Bianca Balmaceda, Joaquín Nuñez y Amalia Santa Cruz"
-format: html
-theme: quartz
 date: "2026-04-05"
+format: 
+  html:
+    theme: minty
+    toc: true
+    number-sections: true
+    code-fold: true
 ---
 
 # **Selección del artículo:**
@@ -40,9 +44,6 @@ Tercero y último, se realizó una recodificación de las categorías de respues
 ```{r}
 
 rm(list = ls()) # Limpiar el entorno de trabajo
-
-# Instalación de los paquetes necesarios
-install.packages(c("haven", "tidyverse", "sjlabelled", "srvyr", "gt", "kableExtra"))
 
 library(haven) # Para leer archivos .dta y .sav
 library(tidyverse) # Para manipulación de datos
