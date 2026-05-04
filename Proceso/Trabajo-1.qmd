@@ -1,11 +1,36 @@
 ---
 title: "Trabajo 1"
+author: "Bianca Balmaceda, Joaquín Nuñez y Amalia Santa Cruz"
 format: html
+theme: united
+date: "2026-04-05"
 ---
+
+# **Selección del artículo:**
+Para el presente reporte de reproducibilidad se escogió el reporte de la Encuesta CEP N° 95, Septiembre-Octubre 2025, publicada el 27 octubre de 2025 por el Centro de Estudios Públicos.
+
+# **Evaluación de reproducibilidad:**
+
+## **Disponibilidad de datos:**
+Los datos utilizados en el reporte, son de acceso abierto, utiliza la base de datos del CEP N°95.
+
+## **Disponibilidad de código:**
+El reporte no proporciona acceso al código utilizado para el análisis.
+
+## **Documentación:**
+El reporte no describe claramente los métodos y procedimientos utilizados para el estudio. Se entrega información general sobre la metodología en cuanto a la población objetivo, el diseño muestral, el modo de aplicación y la tasa de respuesta. Está disponible el cuestionario, diccionario de variables, manual de usuario y los datos de la muestra, además de la base de datos, por lo que otro investigador si podría replicar el estudio. 
+
+## **Transparencia:**
+El reporte no proporciona información sobre los posibles conflictos de interés, financiamiento, y otros aspectos relacionados con la transparencia de la investigación. Sin embargo, al ser un artículo del CEP se puede obtener información adicional por medio de la institución. En la página web hay un apartado de financiamiento donde se detalla que se financia gracias a la contribución de personas naturales y jurídicas, y que ningún conglomerado económico o empresa puede donar más del 10% del presupuesto anual de la institución (Centro de Estudios Públicos [CEP], s.f.). Además, hay detalle de los principales contribuyentes y dentro de qué rango monetario aportan. 
+
+# **Análisis reproducible:**
+El resultado específico del reporte que se reproducirá es el resultado de la siguiente pregunta: “Si las elecciones presidenciales fueran el próximo domingo, y los candidatos fueran los siguientes, ¿por quién votaría usted?” 
 
 
 # Librerías necesarias para el trabajo:
 ```{r}
+
+rm(list = ls()) # Limpiar el entorno de trabajo
 
 # Instalación de los paquetes necesarios
 install.packages(c("haven", "tidyverse", "sjlabelled", "srvyr", "gt", "kableExtra"))
@@ -23,17 +48,101 @@ library(kableExtra) # Para mejorar la apariencia de las tablas
 
 # Cargamos las bases de datos
 ```{r}
-datos_CEP_marzo_2000 = read_dta("Encuesta CEP 39 Mar-Abr 2000.dta")
+CEP_2025 = read_rds("cep95.rds")
 
-datos_CEP_mayo_2009 = read_sav("Encuesta CEP 59 May-Jun 2009.sav")
-
-datos_CEP_mayo_2019 = read_sav("Encuesta CEP 83 May 2019 v1.sav")
-
-datos_CEP_diciembre_2019 = read_sav("Encuesta CEP 84 Dic 2019 v1.sav")
+head(CEP_2025)
 ```
 
 # Escogemos las variables
 ```{r}
-CEP_39 = datos_CEP_marzo_2000 %>% select(p34_a, p34_b, p35a, p35_b)
+data_CEP_2025 = CEP_2025 %>%
+  select(elec_pres_urna_30, pond)
+
+head(data_CEP_2025)
 
 
+```
+
+# Limpieza y recodificación de las variables
+```{r}
+
+data_procesada_CEP_2025 <- data_CEP_2025 %>%
+  mutate(voto_pres = case_when(
+    elec_pres_urna_30 == 1  ~ "Eduardo Artés",
+    elec_pres_urna_30 == 2  ~ "Marco Enríquez-Ominami",
+    elec_pres_urna_30 == 3  ~ "Jannette Jara",
+    elec_pres_urna_30 == 4  ~ "Johanes Kaiser",
+    elec_pres_urna_30 == 5  ~ "José Antonio Kast",
+    elec_pres_urna_30 == 6  ~ "Evelyn Matthei",
+    elec_pres_urna_30 == 7  ~ "Harold Mayne-Nicholls",
+    elec_pres_urna_30 == 8  ~ "Franco Parisi",
+    elec_pres_urna_30 %in% c(9, 10) ~ "Nulo + Blanco", 
+    elec_pres_urna_30 == 11 ~ "No vota",
+    TRUE ~ NA_character_ 
+  )) %>%
+  filter(!is.na(voto_pres))
+
+```
+
+# Ponderación
+
+```{r}
+diseño_CEP = data_procesada_CEP_2025 %>%
+  as_survey_design(weights = pond)
+
+
+tabla_resultados = diseño_CEP %>%
+  group_by(voto_pres) %>%
+  summarise(porcentaje = survey_mean(na.rm = TRUE) * 100) %>%
+  arrange(desc(porcentaje))
+```
+
+# Visualización de los resultados
+
+```{r}
+#| label: visualizacion
+#| fig-cap: "Reproducción: Intención de Voto Presidencial (Total Muestra)"
+
+# 1. Definimos el orden manual de las categorías de control
+# Queremos que estas aparezcan al final del gráfico
+controles <- c("No vota", "Nulo + Blanco")
+
+# 2. Extraemos los nombres de los candidatos y los ordenamos por su porcentaje
+candidatos_ordenados <- tabla_resultados %>%
+  filter(!voto_pres %in% controles) %>%
+  arrange(porcentaje) %>% # De menor a mayor para que el mayor quede arriba al flipear
+  pull(voto_pres)
+
+# 3. Combinamos ambos: primero los controles y luego los candidatos
+# El orden en los niveles de un factor determina la posición en el eje
+orden_final <- c(controles, candidatos_ordenados)
+
+# 4. Aplicamos el factor y graficamos
+tabla_resultados %>%
+  mutate(voto_pres = factor(voto_pres, levels = orden_final)) %>%
+  ggplot(aes(x = voto_pres, y = porcentaje)) +
+  geom_col(fill = "#00ADEF") + 
+  coord_flip() +
+  geom_text(aes(label = paste0(round(porcentaje, 0), "%")), 
+            hjust = -0.2, size = 3.5) +
+  labs(title = "Intención de Voto Presidencial",
+       subtitle = "Escenario: Elección el próximo domingo (Urna)",
+       x = NULL, 
+       y = "Porcentaje (%)",
+       caption = "Fuente: Reproducción propia basada en datos CEP 2025.") +
+  theme_minimal() +
+  theme(panel.grid.major.y = element_blank()) # Limpia el fondo para que se vea más profesional
+```
+
+# **Conclusiones:** 
+En cuanto al análisis realizado se concluye que el nivel de reproducibilidad del reporte de la Encuesta CEP N° 95 es alto, aunque con ciertas limitaciones. La base de datos, el diccionario de variables, el cuestionario y el manual de usuario son de acceso abierto, lo que permite replicar los resultados sin mayores dificultades, a pesar de que el código utilizado no es de acceso abierto. Al intentar reproducir los resultados de la pregunta sobre intención de voto presidencial, se logró replicar el resultado en su gran mayoría. 
+La discrepancia entre el resultado reproducido y el original es en la categoría "No vota", la reproducción arrojó un 8%, mientras que el original muestra un 9%, esta diferencia sugiere que los resultados originales fueron obtenidos con un esquema de ponderación específico que no se encuentra documentado públicamente. Es por esta ausencia de los pesos muestrales exactos aplicados por los investigadores del CEP, y por la ausencia del código utilizado para los análisis, que no se pudo replicar este resultado específico de forma exacta, siendo esto la principal limitación para la reproducibilidad del reporte de la encuesta. Por lo mismo, es posible replicar los resultados de forma aproximada, pero la falta de documentación detallada y el código impide la reproducción exacta.
+
+# **Recomendaciones:**
+La principal recomendación para mejorar la reproducibilidad del reporte de la encuesta es publicar el código que fue utilizado para analizar y procesar los datos, idealmente a través de algún repositorio público como GitHub, esto permitiría a otros investigadores poder replicar los resultados de forma exacta. En segundo lugar, es de suma importancia documentar las decisiones que se toman en cuanto a la metodología. Ejemplos en este caso son el esquema de ponderación utilizado y el tratamiento de casos perdidos. Se debiera especificar de forma clara los pesos muestrales que fueron aplicados al cálculo de porcentajes, para poder corregir los sesgos en la muestra, y se debiera explicar el tratamiento ya que este podría afectar los resultados. En tercer lugar, para mejorar la reproducibilidad del artículo, y en alineación con las prácticas de la ciencia abierta, se debiera incluir un archivo de sintaxis reproducible, el cual sirva de ejemplo y reproduzca las tablas y figuras principales del reporte. En cuarto lugar, se sugiere una mayor transparencia metodológica en el reporte mismo. A pesar de que se entrega información general sobre el diseño muestral y la metodología, falta información clara en el mismo reporte de la encuesta sobre los posibles conflictos de interés, financiamiento y transparencia de la investigación.
+
+# **Bibliografía:**
+
+Centro de Estudios Públicos. (2025, 27 de octubre). Encuesta CEP N° 95, Septiembre-Octubre 2025. https://www.cepchile.cl/encuesta/encuesta-cep-n-95-septiembre-octubre-2025/
+
+Centro de Estudios Públicos. (s.f.). Financiamiento. Recuperado el 29 de abril de 2026, de https://www.cepchile.cl/financiamiento/ 
